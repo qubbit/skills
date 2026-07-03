@@ -1,5 +1,12 @@
 # Lighthouse Perfect-Score Checklist
 
+**Scope:** this checklist applies to the **landing mode built as raw HTML** — the only
+space-ui combination held to the zero-JS, Lighthouse 95–100 bar. Forms, dashboards, and
+control-centers (and any React output) are app UIs: keep the accessibility items here as a
+baseline, but they do not chase Performance-100 and may use JavaScript. Colors still come
+from the single-accent token system (`references/color-system.md`); in landing/HTML mode,
+include its **static fallbacks** so older engines theme correctly.
+
 This is the definitive checklist for achieving 95–100 in all four Lighthouse categories on a static landing page with no JavaScript. Read this before writing any code.
 
 ---
