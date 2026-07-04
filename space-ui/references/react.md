@@ -53,6 +53,12 @@ Match the project's existing convention. In priority order:
 
 - **Forms:** controlled inputs; validation state per field; render errors below the
   control with `role="alert"` + `aria-invalid`. Mirror the CSS in `references/forms.md`.
+  For dropdowns, build the custom listbox from `references/forms.md` (never a native
+  `<select>` — its open list can't be themed): keep `open`/`selected`/`activeIndex` in
+  `useState`, use the same `role="combobox"`/`role="listbox"` markup and CSS, and show the
+  label only on the button (the `✓` lives on the selected option). Or use a headless
+  library (Radix/React-Aria `Select`, Headless UI `Listbox`) styled with the tokens — it
+  handles the ARIA/keyboard for you.
 - **Dashboards/control-centers (live):** fetch/subscribe in `useEffect`; keep a bounded
   buffer; throttle high-frequency updates (rAF or interval) to avoid re-render storms;
   memoize heavy children (`React.memo`, `useMemo`). Announce critical changes via an
