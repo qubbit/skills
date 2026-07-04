@@ -62,11 +62,25 @@ Big monospaced-feel numbers in the display font, with unit and trend:
 <svg viewBox="0 0 40 40" class="gauge" role="img" aria-label="CPU load 72%">
   <circle cx="20" cy="20" r="16" fill="none" stroke="var(--line)" stroke-width="3"/>
   <circle cx="20" cy="20" r="16" fill="none" stroke="var(--accent)" stroke-width="3"
-    stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="28"
+    stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="28.15"
     transform="rotate(-90 20 20)"/>
 </svg>
 ```
-Drive `stroke-dashoffset` from the value; switch stroke to `--warn`/`--crit` past thresholds.
+
+**Compute the offset — don't hand-guess it.** For radius `r` and a percentage
+`pct` (0–100):
+- Circumference `C = 2 · π · r`. For `r = 16` → `C ≈ 100.53`.
+- Set `stroke-dasharray = C` and `stroke-dashoffset = C · (1 − pct/100)`.
+  - 72% of `r=16` → offset `= 100.53 · 0.28 ≈ 28.15`.
+- `rotate(-90 …)` starts the arc at 12 o'clock; `stroke-linecap="round"` gives the
+  rounded tip.
+
+In React/JS, drive it live from state so you never hardcode:
+```js
+const C = 2 * Math.PI * r;                 // r = 16
+const dashoffset = C * (1 - pct / 100);
+```
+Switch the stroke to `var(--warn)` / `var(--crit)` past threshold values.
 
 ## Live event log
 

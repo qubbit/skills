@@ -139,6 +139,13 @@ Other modes do not chase Lighthouse-100 (they're app UIs) but keep the a11y base
 
 - **HTML:** one self-contained `.html` per page. Save to the user's requested path (or
   `/mnt/user-data/outputs/` when no path is given) and present it.
+- **Favicon:** always include a favicon so the browser doesn't fire a 404 for
+  `/favicon.ico`. Simplest is an inline data-URI in `<head>` — either a no-op
+  (`<link rel="icon" href="data:,">`) or a tiny on-brand SVG glyph:
+  ```html
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='9' fill='none' stroke='%2300f0ff' stroke-width='2'/></svg>">
+  ```
+  (URL-encode `#` as `%23` in the data URI.)
 - **React:** component file(s) + a shared `theme.css` (or CSS module) holding the tokens.
   Keep components focused; colocate styles per the project's convention.
 - State assumptions (accent chosen, mode, target) briefly so the user can adjust.
@@ -150,5 +157,6 @@ Other modes do not chase Lighthouse-100 (they're app UIs) but keep the a11y base
 3. Two Google Fonts only; display face on labels/headings, sans on body.
 4. `:focus-visible` rings on every interactive element; 44px targets; labels ↔ inputs.
 5. Animations wrapped in `prefers-reduced-motion`.
-6. Mode-specific checklist from the reference file satisfied.
-7. **Landing + HTML only:** the full `references/lighthouse-checklist.md` passes.
+6. HTML output includes a favicon `<link>` (no `/favicon.ico` 404).
+7. Mode-specific checklist from the reference file satisfied.
+8. **Landing + HTML only:** the full `references/lighthouse-checklist.md` passes.
