@@ -20,6 +20,11 @@ The same design system spans four artifact types (modes) and two output targets.
   (Chakra Petch, Orbitron, Rajdhani, Exo 2, Audiowide, Bruno Ace) and a clean sans for
   body (Sora, Outfit, Plus Jakarta Sans, Manrope). Never Inter, Roboto, or Arial.
   Uppercase + wide letter-spacing (`0.16em`–`0.32em`) on labels/eyebrows is the tell.
+- **Corners:** SHARP by default — `border-radius: 0` on panels, cards, inputs, and
+  buttons. Sci-fi UIs are angular; rounded corners read as consumer/friendly, not
+  cinematic. For visual interest, chamfer (notch) corners via the configurable `--notch`
+  variable (see `references/motifs.md`) — never round them. Small radii (≤2px) are the
+  most rounding ever acceptable, and only on tiny chips.
 - **Atmosphere:** scanline overlays, masked grid patterns, soft radial glows, 1px
   accent-tinted borders (`--accent-line`), glow shadows (`--accent-glow`) used sparingly.
 - **Motion:** subtle; always wrapped in `@media (prefers-reduced-motion: no-preference)`.
@@ -87,10 +92,16 @@ from a single value.
   -webkit-mask-image: radial-gradient(ellipse at center, #000 15%, transparent 75%);
           mask-image: radial-gradient(ellipse at center, #000 15%, transparent 75%);
 }
-/* Panel */
+/* Panel — SHARP corners (border-radius: 0; sci-fi UIs never round — chamfer via
+   --notch instead, see motifs.md). The border is a luminous accent line
+   (--accent-border) with a soft outer glow and a faint inner accent line, so
+   panels read as lit rather than muted gray. */
 .panel {
   background: linear-gradient(180deg, var(--panel), #070812);
-  border: 1px solid var(--line); border-radius: 4px; padding: 1.25rem;
+  border: 1px solid var(--accent-border); border-radius: 0; padding: 1.25rem;
+  box-shadow:
+    0 0 12px -2px var(--accent-glow),                      /* soft outer glow */
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 5%, transparent); /* faint inner line */
 }
 /* Eyebrow / section label */
 .eyebrow {
@@ -98,6 +109,12 @@ from a single value.
   text-transform: uppercase; color: var(--accent);
 }
 ```
+
+**Sci-fi motifs** — the signature details (HUD **corner brackets**, notched/clipped panels,
+scan sweeps, targeting reticles, segmented meters, telemetry readouts, glow dividers,
+hazard stripes, terminal caret, starfields) live in `references/motifs.md`. Read it and
+use 1–2 per view to establish the aesthetic. All are accent-token-themed and
+reduced-motion-guarded.
 
 Full component recipes (buttons, inputs, cards, tables, status lights, gauges) live in
 the mode reference files, all built on these tokens.

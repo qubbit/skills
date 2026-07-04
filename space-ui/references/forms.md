@@ -25,7 +25,7 @@ Every field pairs a `<label>` with its control (accessibility requirement).
   text-transform: uppercase; color: var(--dim);
 }
 .input, .select, .textarea {
-  width: 100%; min-height: 44px; padding: .6rem .75rem; border-radius: 2px;
+  width: 100%; min-height: 44px; padding: .6rem .75rem; border-radius: 0; /* sharp */
   font-family: var(--body); font-size: .95rem; color: var(--ink);
   background: var(--bg); border: 1px solid var(--line);
 }
@@ -71,7 +71,7 @@ Every field pairs a `<label>` with its control (accessibility requirement).
 
 ```css
 .check-input { appearance: none; width: 20px; height: 20px; border: 1px solid var(--line);
-  background: var(--bg); border-radius: 3px; display: grid; place-content: center; cursor: pointer; }
+  background: var(--bg); border-radius: 0; display: grid; place-content: center; cursor: pointer; }
 .check-input[type=radio] { border-radius: 50%; }
 .check-input:checked { border-color: var(--accent); background: var(--accent-soft); }
 .check-input:checked::after { content: ''; width: 10px; height: 10px; border-radius: inherit;
@@ -91,7 +91,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
 
 ```css
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  min-height: 44px; padding: .75rem 1.1rem; border-radius: 2px; cursor: pointer;
+  min-height: 44px; padding: .75rem 1.1rem; border-radius: 0; cursor: pointer;
   font-family: var(--display); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
   border: 1px solid transparent; }
 .btn-primary { color: var(--on-accent); background: var(--accent); border-color: var(--accent);

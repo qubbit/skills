@@ -63,7 +63,7 @@ h1 .accent { color: var(--accent); text-shadow: 0 0 30px var(--accent-glow); }
 ```css
 .cta {
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
-  min-height: 48px; padding: 1rem 2rem; border-radius: 2px;
+  min-height: 48px; padding: 1rem 2rem; border-radius: 0;
   font-family: var(--display); letter-spacing: .16em; text-transform: uppercase;
   color: var(--on-accent); background: var(--accent);
   border: 1px solid var(--accent);

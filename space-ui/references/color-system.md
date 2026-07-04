@@ -39,7 +39,8 @@ anywhere else.
   /* Translucent accents for glows, fills, borders (color-mix keeps alpha math simple). */
   --accent-soft:   color-mix(in srgb, var(--accent) 12%, transparent);
   --accent-fill:   color-mix(in srgb, var(--accent) 6%,  transparent);
-  --accent-line:   color-mix(in srgb, var(--accent) 22%, transparent);
+  --accent-line:   color-mix(in srgb, var(--accent) 22%, transparent); /* faint hairline */
+  --accent-border: color-mix(in srgb, var(--accent) 38%, transparent); /* visible luminous panel border */
   --accent-ring:   color-mix(in srgb, var(--accent) 45%, transparent);
   --accent-glow:   color-mix(in srgb, var(--accent) 30%, transparent);
 

@@ -28,7 +28,7 @@ in the space-ui language. Assume live/interactive data → React-leaning by defa
 
 ```css
 .sidebar { background: linear-gradient(180deg, var(--panel), var(--bg)); border-right: 1px solid var(--line); padding: 1.25rem; }
-.nav-item { display: flex; align-items: center; gap: .7rem; padding: .7rem .8rem; border-radius: 3px;
+.nav-item { display: flex; align-items: center; gap: .7rem; padding: .7rem .8rem; border-radius: 0;
   font-family: var(--display); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase;
   color: var(--muted); text-decoration: none; }
 .nav-item:hover { color: var(--accent); background: var(--accent-soft); }
