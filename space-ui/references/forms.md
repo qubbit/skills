@@ -52,8 +52,14 @@ style. Works identically in vanilla HTML+JS and React (same markup/ARIA/CSS; onl
 event wiring differs). Verified in Chrome.
 
 Key rule that trips people up: the **collapsed button shows the label ONLY — never a
-checkmark**. The `✓` appears only on the selected option *inside the open list*. Keep the
-option label in its own `.txt` span so the button copies the label without the tick.
+checkmark**. The checkmark appears only on the selected option *inside the open list*. Keep
+the option label in its own `.txt` span so the button copies the label without the tick.
+
+Use the **Lucide `check` icon** for the selected-option marker (inline SVG) rather than a
+font `✓` glyph — the glyph's shape depends on the system font and often renders with a
+soft curved handle that clashes with the angular aesthetic. The inline SVG is crisp,
+consistent, and matches the rest of the icon system. Each option carries the icon in its
+`.tick` span; it's shown only when the option is selected.
 
 ```html
 <div class="xselect" data-open="false">
@@ -65,11 +71,17 @@ option label in its own `.txt` span so the button copies the label without the t
   </button>
   <ul class="xselect-list" id="sec-list" role="listbox" aria-labelledby="sec-lbl" tabindex="-1">
     <li class="xselect-opt" role="option" id="sec-0" aria-selected="true">
-      <span class="tick" aria-hidden="true">✓</span><span class="txt">Helios Ring — Inner</span></li>
+      <span class="tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+      </span><span class="txt">Helios Ring — Inner</span></li>
     <li class="xselect-opt" role="option" id="sec-1" aria-selected="false">
-      <span class="tick" aria-hidden="true">✓</span><span class="txt">Kuiper Gate — Outer</span></li>
+      <span class="tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+      </span><span class="txt">Kuiper Gate — Outer</span></li>
     <li class="xselect-opt" role="option" id="sec-2" aria-selected="false">
-      <span class="tick" aria-hidden="true">✓</span><span class="txt">Lagrange Station L5</span></li>
+      <span class="tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+      </span><span class="txt">Lagrange Station L5</span></li>
   </ul>
   <input type="hidden" name="sector" value="Helios Ring — Inner"><!-- for form submit -->
 </div>
@@ -104,8 +116,14 @@ option label in its own `.txt` span so the button copies the label without the t
   padding: .55rem .7rem; font-size: .92rem; color: var(--ink); cursor: pointer; }
 .xselect-opt:hover, .xselect-opt[data-active=true] { background: var(--accent-soft); color: var(--accent); }
 .xselect-opt[aria-selected=true] { color: var(--accent); }
-.xselect-opt .tick { width: 14px; flex: none; color: var(--accent); font-family: var(--display); }
-.xselect-opt[aria-selected=false] .tick { visibility: hidden; } /* reserve space, hide glyph */
+/* Lucide `check` icon, square caps for a sharp/angular tick. Shown only when the
+   option is selected; the slot always reserves space so labels stay aligned. */
+.xselect-opt .tick { width: 15px; height: 15px; flex: none; color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center; }
+.xselect-opt .tick svg { width: 100%; height: 100%;
+  stroke-linecap: square; stroke-linejoin: miter;
+  filter: drop-shadow(0 0 4px var(--accent-glow)); }
+.xselect-opt[aria-selected=false] .tick { visibility: hidden; } /* reserve space, hide icon */
 ```
 ```js
 // Vanilla controller (one per .xselect). React: same markup/CSS, drive open/selected/
